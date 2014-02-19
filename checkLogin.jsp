@@ -8,8 +8,8 @@
 	<%
 	    if (request.getParameter("Submit") != null)
 	    {
-	        String myUSR = "dfiske";
-	        String myPWD = "h4shbr0wnz.";
+	        String myUSR = "YourUserName";
+	        String myPWD = "YourPassword";
 
 	        //get the user input from the login page
 	        String userName = (request.getParameter("USERID")).trim();
