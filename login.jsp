@@ -37,7 +37,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Radiology Information System</a>
+				<a class="navbar-brand" href="login.jsp">Radiology Information System</a>
 			</div>
 		</div>
 	</div>
