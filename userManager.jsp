@@ -1,7 +1,8 @@
 <%@ include file="menu.jsp" %>
 <%@ page import="java.sql.*"%>
+<%@ page import="java.util.Arraylist" %>
+<%@ page import="java.util.List" %>
 <%
-	int personID = (Integer) session.getAttribute("id");
 	String myUSR = "shuxiao";
 	String myPWD = "4A2y3uram";
 	
@@ -35,7 +36,7 @@
 	//select the user table from the underlying db and validate the user name and password
 	Statement stmt = null;
 	ResultSet rset = null;
-	String sql = "SELECT * FROM persons WHERE person_id = '" + personID + "'";
+	String sql = "SELECT * FROM USERS";
 	try
 	{
 	    stmt = conn.createStatement();
@@ -45,19 +46,18 @@
 	    out.println("<hr>" + ex.getMessage() + "<hr>");
 	}
 	
-	String firstName = "";
-	String lastName = "";
-	String address = "";
-	String email = "";
-	String phone = "";
-	
+	List userId = "";
+	List pswd = "";
+	List FstName = "";
+	List LstName = "";
+	int count = -1
 	while (rset != null && rset.next())
 	{
-	    firstName = (rset.getString(2)).trim();
-	    lastName = (rset.getString(3)).trim();
-	    address = (rset.getString(4)).trim();
-	    email = (rset.getString(5)).trim();
-	    phone = (rset.getString(6)).trim();
+		count += 1;
+	    userId.add((rset.getString(0)).trim());
+	    pswd.add((rset.getString(1)).trim());
+	    FstName.add((rset.getString(2)).trim());
+	    LstName.add((rset.getString(3)).trim());
 	}
 	
 	try
@@ -69,15 +69,19 @@
 	}
 %>
 <div class="container">
-	<form name="personForm" action="updatePersons.jsp" method="post" class="form-signin" role="form">
-		<h1 class=\"form-signin-heading\">My Info</h1>
-		<input type="text" name="FIRSTNAME" class="form-control" placeholder="First Name" value="<% out.println(firstName); %>" required>
-		<input type="text" name="LASTNAME" class="form-control" placeholder="Last Name" value="<% out.println(lastName); %>" required>
-		<input type="text" name="ADDRESS" class="form-control" placeholder="Address" value="<% out.println(address); %>" required>
-		<input type="text" name="EMAIL" class="form-control" placeholder="Email" value="<% out.println(email); %>" required>
-		<input type="text" name="PHONE" class="form-control" placeholder="Phone (XXX-XXX-XXXX)" value="<% out.println(phone); %>" required>
+	<form name="userList" action="/update/" method="post" class="form-signin" role="form">
+		<h1 class=\"form-signin-heading\">User List</h1>
+		<ul>
+		<%
+		while(count!=-1){
+			out.println("<li>"+userId.get(count)+"  "+pswd.get(count)+"  "+Fstname.get(count)+"  "+LstName.get(count));
+			count -= 1;
+		}
+		%>
+		</ul>
 		<button type="submit" name="Submit" class="btn btn-lg btn-primary btn-block">Update</button>
 	</form>
 </div>
 </body>
 </html>
+	

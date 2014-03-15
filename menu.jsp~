@@ -47,7 +47,7 @@
             <%
 				if (userClass.equals("a"))
 				{
-				    out.println("<li><a href="userManager.jsp">User Management</a></li><li><a href=\"#reports\">Reports</a></li><li><a href=\"#dataAnalysis\">Data Analysis</a></li>");
+				    out.println("<li><a href=\"userManagement.jsp\">User Management</a></li><li><a href=\"#reports\">Reports</a></li><li><a href=\"#dataAnalysis\">Data Analysis</a></li>");
 				}
 				else if (userClass.equals("r"))
 				{

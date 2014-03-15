@@ -2,8 +2,8 @@
 <%
     if (request.getParameter("Submit") != null)
     {
-        String myUSR = "dfiske";
-        String myPWD = "h4shbr0wnz.";
+        String myUSR = "shuxiao";
+        String myPWD = "4A2y3uram";
 
         //get the user input from the login page
         String userName = (request.getParameter("USERID")).trim();

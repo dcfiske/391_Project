@@ -2,9 +2,9 @@
 <%
     if (request.getParameter("Submit") != null)
     {
-	int personID = (Integer) session.getAttribute("id");
-        String myUSR = "shuxiao";
-        String myPWD = "4A2y3uram";
+		int personID = (Integer) session.getAttribute("id");
+        String myUSR = "dfiske";
+        String myPWD = "h4shbr0wnz.";
 
         //get the user input from the info page
         String firstName = (request.getParameter("FIRSTNAME")).trim();
