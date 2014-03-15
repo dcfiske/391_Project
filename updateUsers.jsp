@@ -2,15 +2,11 @@
 <%
     if (request.getParameter("Submit") == null)
         response.sendRedirect("login.jsp");
-        
+
 	int personID = (Integer) session.getAttribute("id");
 	
 	//get the user input from the info page
-	String firstName = (request.getParameter("FIRSTNAME")).trim();
-	String lastName = (request.getParameter("LASTNAME")).trim();
-	String address = (request.getParameter("ADDRESS")).trim();
-	String email = (request.getParameter("EMAIL")).trim();
-	String phone = (request.getParameter("PHONE")).trim();
+	String newPwd1 = (request.getParameter("NEWPWD1")).trim();
 	
 	//establish the connection to the underlying database
 	Connection conn = null;
@@ -20,11 +16,7 @@
 	//select the user table from the underlying db and validate the user name and password
 	Statement stmt = null;
 	ResultSet rset = null;
-	String sql = "UPDATE persons SET first_name = '" + firstName + "', " +
-	        						 "last_name = '" + lastName + "', " +
-	        						 "address = '" + address + "', " +
-	        						 "email = '" + email + "', " +
-	        						 "phone = '" + phone + "' " +
+	String sql = "UPDATE users SET password = '" + newPwd1 + "' " +
 	        	 "WHERE person_id = '" + personID + "'";
 	try
 	{
