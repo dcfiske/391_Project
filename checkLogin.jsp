@@ -1,15 +1,5 @@
 <%@ page import="java.sql.*" %>
 <%
-<<<<<<< HEAD
-    if (request.getParameter("Submit") != null)
-    {
-        String myUSR = "shuxiao";
-        String myPWD = "4A2y3uram";
-=======
-	if (request.getParameter("Submit") == null)
-	    response.sendRedirect("login.jsp");
->>>>>>> e5944a408128198a1671e1472a84b8b620b7781e
-
 	//get the user input from the login page
 	String userName = (request.getParameter("USERID")).trim();
 	String passwd = (request.getParameter("PASSWD")).trim();

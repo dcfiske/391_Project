@@ -3,7 +3,7 @@
 	String myPWD = "h4shbr0wnz.";
 	
 	String driverName = "oracle.jdbc.driver.OracleDriver";
-	String dbstring = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
+	String dbstring = "jdbc:oracle:thin:@localhost:1525:CRS";
 	
 	try
 	{

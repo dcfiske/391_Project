@@ -14,12 +14,7 @@
 <%@ page import="java.sql.*"%>
 <%
 	int personID = (Integer) session.getAttribute("id");
-<<<<<<< HEAD
-	String myUSR = "shuxiao";
-	String myPWD = "4A2y3uram";
-=======
->>>>>>> e5944a408128198a1671e1472a84b8b620b7781e
-	
+
 	//establish the connection to the underlying database
 	Connection conn = null;
 %>
@@ -73,8 +68,8 @@
 	</form>
 	<form name="personForm2" onsubmit="return checkPWD()" action="updateUsers.jsp" method="post" class="form-signin" role="form">
 		<h1 class=\"form-signin-heading\">Change Password</h1>
-		<input type="text" name="NEWPWD1" class="form-control" placeholder="New Password" required>
-		<input type="text" name="NEWPWD2" class="form-control" placeholder="New Password" required>
+		<input type="password" name="NEWPWD1" class="form-control" placeholder="New Password" required>
+		<input type="password" name="NEWPWD2" class="form-control" placeholder="New Password" required>
 		<button type="submit" name="Submit" class="btn btn-lg btn-primary btn-block">Update</button>
 	</form>
 </div>

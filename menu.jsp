@@ -47,13 +47,15 @@
             <%
 				if (userClass.equals("a"))
 				{
-				    out.println("<li><a href="userManager.jsp">User Management</a></li><li><a href=\"#reports\">Reports</a></li><li><a href=\"#dataAnalysis\">Data Analysis</a></li>");
+				    out.println("<li><a href=\"userManager.jsp\">User Management</a></li>");
+				    out.println("<li><a href=\"reports.jsp\">Reports</a></li>");
+				    out.println("<li><a href=\"analysis.jsp\">Data Analysis</a></li>");
 				}
 				else if (userClass.equals("r"))
 				{
 				    out.println("<li><a href=\"upload.jsp\">Upload</a></li>");
 				}
-			%>
+	    %>
             <li><a href="search.jsp">Search</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
