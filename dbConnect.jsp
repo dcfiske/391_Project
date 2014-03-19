@@ -1,9 +1,9 @@
 <%
-	String myUSR = "dfiske";
-	String myPWD = "h4shbr0wnz.";
+	String myUSR = "";
+	String myPWD = "";
 	
 	String driverName = "oracle.jdbc.driver.OracleDriver";
-	String dbstring = "jdbc:oracle:thin:@localhost:1525:CRS";
+	String dbstring = "jdbc:oracle:thin:@gynne.cs.ualberta.ca:1521:CRS";
 	
 	try
 	{
