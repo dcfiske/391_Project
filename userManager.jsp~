@@ -36,7 +36,7 @@
 		<h1 class=\"form-signin-heading\">User List</h1>
 		<%
 			for(int i=0;i < userId.size();i++){
-				out.println("<li>"+userId.get(i)+"<input type=\"button\" class=\"btn btn-lg btn-primary btn-block\" data=\""+userId.get(i)+"\" value=\"Edit\"></li>");
+				out.println("<li>"+userId.get(i)+"<input type=\"button\" class=\"btn btn-lg btn-primary btn-block\" data-reqno=\""+userId.get(i)+"\" value=\"Edit\"></li>");
 			}
 		%>
 	</form>
