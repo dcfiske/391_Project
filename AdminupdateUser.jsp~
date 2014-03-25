@@ -1,6 +1,9 @@
 <%@ page import="java.sql.*" %>
 <%
-
+    	//if (request.getParameter("Submit") == null){
+       // response.sendRedirect("login.jsp");
+	//return;
+	//}
 	String IDforURL = request.getParameter("personId").trim();
 	int personID = Integer.parseInt(IDforURL);
 	

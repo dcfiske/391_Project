@@ -1,11 +1,12 @@
 <%@ page import="java.sql.*" %>
 <%
+    if (request.getParameter("Submit") == null)
+        response.sendRedirect("login.jsp");
 
-	String IDforURL = request.getParameter("personId").trim();
-	int personID = Integer.parseInt(IDforURL);
+	int personID = (Integer) request.getParameters("userId");
 	
 	//get the user input from the info page
-	String newPwd1 = (request.getParameter("NEWPSW1")).trim();
+	String newPwd1 = (request.getParameter("NEWPWD1")).trim();
 	
 	//establish the connection to the underlying database
 	Connection conn = null;
@@ -33,5 +34,6 @@
 	{
 	    out.println("<hr>" + ex.getMessage() + "<hr>");
 	}
-	response.sendRedirect("Adminupdate.jsp?personId="+IDforURL);
+	
+	response.sendRedirect("Adminupdate.jsp");
 %>

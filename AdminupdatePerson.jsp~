@@ -1,7 +1,9 @@
 <%@ page import="java.sql.*" %>
 <%
-	String IDforURL = request.getParameter("personId").trim();
-	int personID = Integer.parseInt(IDforURL);
+	if (request.getParameter("Submit") == null)
+	        response.sendRedirect("login.jsp");
+        
+	int personID = Integer.parseInt(request.getParameter("personId").trim());
 	
 	//get the user input from the info page
 	String firstName = (request.getParameter("FIRSTNAME")).trim();
@@ -41,5 +43,5 @@
 	    out.println("<hr>" + ex.getMessage() + "<hr>");
 	}
 	
-	response.sendRedirect("Adminupdate.jsp?personId="+IDforURL);
+        response.sendRedirect("Adminupdate.jsp");
 %>

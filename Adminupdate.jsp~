@@ -84,7 +84,7 @@
 		<input type="text" name="ADDRESS" class="form-control" placeholder="Address" value="<% out.println(address); %>" required>
 		<input type="text" name="EMAIL" class="form-control" placeholder="Email" value="<% out.println(email); %>" required>
 		<input type="text" name="PHONE" class="form-control" placeholder="Phone (XXX-XXX-XXXX)" value="<% out.println(phone); %>" required>
-		<input type="submit" value="Update" class="btn btn-lg btn-primary btn-block">
+		<input type="submit" value="Update" class="btn btn-lg btn-primary btn-block">Update</button>
 	</form>
 
 		<h1 class="form-signin-heading">Family Doctor Info</h1>
