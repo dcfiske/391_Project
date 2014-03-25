@@ -1,8 +1,13 @@
-<%@ include file="menu.jsp" %>
-<%@ page import="java.sql.*"%>
+<%@ page import="java.sql.*" %>
 <%
-	int personID = (Integer) session.getAttribute("id");
+    	if (request.getParameter("userId") == null)
+        response.sendRedirect("login.jsp");
 
+	int personID = Integer.parseInt(request.getParameter("personId").trim());
+	
+	//get the user input from the info page
+	String newPwd1 = (request.getParameter("NEWPWD1")).trim();
+	
 	//establish the connection to the underlying database
 	Connection conn = null;
 %>
@@ -11,4 +16,24 @@
 	//select the user table from the underlying db and validate the user name and password
 	Statement stmt = null;
 	ResultSet rset = null;
-	String sql = "SELECT * FROM persons WHERE person_id = '" + personID + "'";
+	String sql = "UPDATE users SET password = '" + newPwd1 + "' " +
+	        	 "WHERE person_id = '" + personID + "'";
+	try
+	{
+	    stmt = conn.createStatement();
+	    rset = stmt.executeQuery(sql);
+	} catch (Exception ex)
+	{
+	    out.println("<hr>" + ex.getMessage() + "<hr>");
+	}
+	
+	try
+	{
+	    conn.close();
+	} catch (Exception ex)
+	{
+	    out.println("<hr>" + ex.getMessage() + "<hr>");
+	}
+	
+	response.sendRedirect("Adminupdate.jsp");
+%>

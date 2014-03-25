@@ -1,9 +1,9 @@
 <%@ page import="java.sql.*" %>
 <%
-    	if (request.getParameter("Update") == null)
+    if (request.getParameter("Submit") == null)
         response.sendRedirect("login.jsp");
 
-	int personID = Integer.parseInt(request.getParameter("personId").trim());
+	int personID = (Integer) request.getParameters("userId");
 	
 	//get the user input from the info page
 	String newPwd1 = (request.getParameter("NEWPWD1")).trim();

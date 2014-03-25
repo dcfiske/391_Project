@@ -1,13 +1,14 @@
 <%@ page import="java.sql.*" %>
 <%
-    	if (request.getParameter("Update") == null)
-        response.sendRedirect("login.jsp");
-
+	if (request.getParameter("Submit") == null)
+	        response.sendRedirect("login.jsp");
+        
 	int personID = Integer.parseInt(request.getParameter("personId").trim());
 	
 	//get the user input from the info page
-	String newPwd1 = (request.getParameter("NEWPWD1")).trim();
-	
+	String firstName = (request.getParameter("patientId")).trim();
+	String lastName = (request.getParameter("doctorId")).trim();
+
 	//establish the connection to the underlying database
 	Connection conn = null;
 %>
@@ -16,7 +17,11 @@
 	//select the user table from the underlying db and validate the user name and password
 	Statement stmt = null;
 	ResultSet rset = null;
-	String sql = "UPDATE users SET password = '" + newPwd1 + "' " +
+	String sql = "UPDATE FAMILY_DOCTOR SET PATIENT_ID = '" + patientId + "', " +
+	        						 "DOCTOR_ID = '" + doctorId + "', " +
+	        						 "address = '" + address + "', " +
+	        						 "email = '" + email + "', " +
+	        						 "phone = '" + phone + "' " +
 	        	 "WHERE person_id = '" + personID + "'";
 	try
 	{
