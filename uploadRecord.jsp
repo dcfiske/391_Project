@@ -56,22 +56,20 @@
 	<h1 class=\"form-signin-heading\">
 	<center>Radiology Record Successfully Entered <br> <br> Upload Image for this record? </center>
 	</h1>
-	<form name="uploadImage" method="POST" enctype="multipart/form-data" action="uploadImage.jsp">
-	<table>
-	  <tr>
-	    <th>File path: </th>
-	    <td><input name="file-path" type="file" size="30" ></input></td>
-	  </tr>
-	  <tr>
-	    <td ALIGN=CENTER COLSPAN="2"><input type="submit" name=".submit"
-	    class="btn btn-lg btn-primary btn-block" value="Upload"></td>
-	  </tr>
-	  <tr>
-	    <td ALIGN=CENTER COLSPAN="2">
-		<form name="uploadNo" action="upload.jsp" method="post" class="form-signin" role="form">
-			<button type="submit" name="no" class="btn btn-lg btn-primary btn-block">No</button>
-		</form></td>
-	  </tr>
-	</table>
+	<form name="uploadImage" method="POST" enctype="multipart/form-data" action="uploadImage">
+		<center>
+			<table>
+			  <tr>
+			    <th> File path:</th>
+			    <td><input name="file-path" type="file" size="40"></input></td>
+			  </tr>
+			  <br>
+			  <tr>
+			    <td><input type="submit" name=".submit" value="Upload"></td>
+			  </tr>
+			</table>
+		</center>
 	</form>
 </div>
+</body>
+</html>
