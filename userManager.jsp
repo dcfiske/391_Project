@@ -11,6 +11,7 @@
 	Statement stmt = null;
 	ResultSet rset = null;
 	ArrayList userId = new ArrayList();
+	ArrayList personId = new ArrayList();
 	String sql = "SELECT * FROM USERS";
 	try
 	{
@@ -18,6 +19,7 @@
 	    rset = stmt.executeQuery(sql);
 	while(rset.next()){
 		userId.add((rset.getString(1)).trim());
+		personId.add((rset.getString(4)).trim());
 	}
 	} catch (Exception ex)
 	{
@@ -32,13 +34,14 @@
 	}
 %>
 <div class="container">
-	<form name="personForm1" action=/"AdminupdateUser.jsp/" method="post" class="form-signin" role="form">
+	<form name="personForm1" action="Adminupdate.jsp" method="get" class="form-updateuser" role="form">
 		<h1 class=\"form-signin-heading\">User List</h1>
 		<%
 			for(int i=0;i < userId.size();i++){
-				out.println("<li>"+userId.get(i)+"<input type=\"button\" class=\"btn btn-lg btn-primary btn-block\" data=\""+userId.get(i)+"\" value=\"Edit\"></li>");
+				out.println("<input type=\"radio\" name=\"personId\" value = "+personId.get(i)+">"+userId.get(i)+"<br/>");
 			}
 		%>
+	<input type="submit" value="Enter"/>
 	</form>
 </div>
 </body>
