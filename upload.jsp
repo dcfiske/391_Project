@@ -64,6 +64,8 @@
 <div class="container">
 	<form name="RecordForm" action="uploadRecord.jsp" method="post" role="form">
 		<h1>Enter Radiology Record</h1>
+		PATIENT:
+		<br>
 		<select name="PATIENTID" style="width:300px">
 			<%
 				for (int i = 0; i < patientIDs.size(); i++)
@@ -72,6 +74,8 @@
 				}
 			%>
 		</select>
+		<br>
+		DOCTOR:
 		<br>
 		<select name="DOCTORID" style="width:300px">
 			<%
