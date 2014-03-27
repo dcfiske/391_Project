@@ -42,8 +42,8 @@
 				out.println("<option value = "+personId.get(i)+">"+userId.get(i)+"</option>");
 			}
 		%>
+				</select>
 	<input type="submit" value="Enter"/>
-		</select>
 	</form>
 </div>
 </body>
