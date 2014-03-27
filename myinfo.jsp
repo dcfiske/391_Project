@@ -57,20 +57,20 @@
 	}
 %>
 <div class="container">
-	<form name="personForm1" action="updatePersons.jsp" method="post" class="form-signin" role="form">
-		<h1 class=\"form-signin-heading\">My Info</h1>
-		<input type="text" name="FIRSTNAME" class="form-control" placeholder="First Name" value="<% out.println(firstName); %>" required>
-		<input type="text" name="LASTNAME" class="form-control" placeholder="Last Name" value="<% out.println(lastName); %>" required>
-		<input type="text" name="ADDRESS" class="form-control" placeholder="Address" value="<% out.println(address); %>" required>
-		<input type="text" name="EMAIL" class="form-control" placeholder="Email" value="<% out.println(email); %>" required>
-		<input type="text" name="PHONE" class="form-control" placeholder="Phone (XXX-XXX-XXXX)" value="<% out.println(phone); %>" required>
-		<button type="submit" name="Submit" class="btn btn-lg btn-primary btn-block">Update</button>
+	<form name="personForm1" action="updatePersons.jsp" method="post" role="form">
+		<h1>My Info</h1>
+		<input type="text" name="FIRSTNAME" placeholder="First Name" value="<% out.println(firstName); %>" required>
+		<input type="text" name="LASTNAME" placeholder="Last Name" value="<% out.println(lastName); %>" required>
+		<input type="text" name="ADDRESS" placeholder="Address" value="<% out.println(address); %>" required>
+		<input type="text" name="EMAIL" placeholder="Email" value="<% out.println(email); %>" required>
+		<input type="text" name="PHONE" placeholder="Phone (XXX-XXX-XXXX)" value="<% out.println(phone); %>" required>
+		<button type="submit" name="Submit">Update</button>
 	</form>
-	<form name="personForm2" onsubmit="return checkPWD()" action="updateUsers.jsp" method="post" class="form-signin" role="form">
-		<h1 class=\"form-signin-heading\">Change Password</h1>
-		<input type="password" name="NEWPWD1" class="form-control" placeholder="New Password" required>
-		<input type="password" name="NEWPWD2" class="form-control" placeholder="New Password" required>
-		<button type="submit" name="Submit" class="btn btn-lg btn-primary btn-block">Update</button>
+	<form name="personForm2" onsubmit="return checkPWD()" action="updateUsers.jsp" method="post" role="form">
+		<h1>Change Password</h1>
+		<input type="password" name="NEWPWD1" placeholder="New Password" required>
+		<input type="password" name="NEWPWD2" placeholder="New Password" required>
+		<button type="submit" name="Submit">Update</button>
 	</form>
 </div>
 </body>
