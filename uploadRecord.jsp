@@ -54,13 +54,12 @@
 
 <div class="container">
 	<h1 class=\"form-signin-heading\">
-	<center>Radiology Record Successfully Entered <br> <br> Upload Image for this record? </center>
+	<center>Radiology Record Successfully Entered <br> <br> Upload image for this record? </center>
 	</h1>
 	<form name="uploadImage" method="POST" enctype="multipart/form-data" action="uploadImage">
 		<center>
 			<table>
 			  <tr>
-			    <th> File path:</th>
 			    <td><input name="file-path" type="file" size="40"></input></td>
 			  </tr>
 			  <br>
