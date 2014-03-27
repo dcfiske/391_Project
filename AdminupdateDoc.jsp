@@ -4,8 +4,10 @@
 	int personID = Integer.parseInt(IDforURL);
 	
 	//get the user input from the info page
-	String firstName = (request.getParameter("patientId")).trim();
-	String lastName = (request.getParameter("doctorId")).trim();
+	String doctorId = (request.getParameter("olddocId")).trim();
+	String oldpatId = (request.getParameter("oldpatId")).trim();
+	String patientId = (request.getParameter("patId")).trim();
+	String doctorId = (request.getParameter("docId")).trim();
 
 	//establish the connection to the underlying database
 	Connection conn = null;
@@ -17,10 +19,7 @@
 	ResultSet rset = null;
 	String sql = "UPDATE FAMILY_DOCTOR SET PATIENT_ID = '" + patientId + "', " +
 	        						 "DOCTOR_ID = '" + doctorId + "', " +
-	        						 "address = '" + address + "', " +
-	        						 "email = '" + email + "', " +
-	        						 "phone = '" + phone + "' " +
-	        	 "WHERE person_id = '" + personID + "'";
+	        	 "WHERE PATIENT_ID = '" + oldpatId + "', " + "DOCTOR_ID = '" + olddocId + "'" ";
 	try
 	{
 	    stmt = conn.createStatement();

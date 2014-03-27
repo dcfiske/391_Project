@@ -27,7 +27,7 @@
 	    stmt3 = conn.createStatement();
 	    rset1 = stmt1.executeQuery(sql1);
 	    rset2 = stmt2.executeQuery(sql2);
-            rset3 = stmt3.executeQuery(sql3);
+        rset3 = stmt3.executeQuery(sql3);
 	} catch (Exception ex)
 	{
 	    out.println("<hr>" + ex.getMessage() + "<hr>");
@@ -42,11 +42,12 @@
 	String email = "";
 	String phone = "";
 	ArrayList doc_id = new ArrayList();
+	ArrayList pat_id = new ArrayList();
 	while (rset1 != null && rset1.next())
 	{
 	    userId = (rset1.getString(1)).trim();
 	    pswd = (rset1.getString(2)).trim();
-            cls = (rset1.getString(3)).trim();
+        cls = (rset1.getString(3)).trim();
 	    date = (rset1.getString(5)).trim();
 	}
 
@@ -58,7 +59,11 @@
 	    email = (rset2.getString(5)).trim();
 	    phone = (rset2.getString(6)).trim();
 	}
-
+	while(rset3!= null && rset3.next())
+	{
+		doc_id.add(rset3.getString(1).trim());
+		pat_id.add(rset3.getString(2).trim());
+	}
 	try
 	{
 	    conn.close();
@@ -69,30 +74,34 @@
 %>
 
 <div class="container">
-	<form name="userForm" action="AdminupdateUser.jsp" method="post" class="form-signin" role="form">
-		<h1 class="form-signin-headin">User Info</h1>
+	<form name="userForm" action="AdminupdateUser.jsp" method="post" role="form">
+		<h1>User Info</h1>
 		<input type="hidden" name = "personId" value = "<%out.println(personID);%>" required>
-		<input type="text" name="userId" class="form-control" placeholder="userId" value = "<%out.println(userId);%>" required>
-		<input type="text" name="NEWPSW1" class="form-control" placeholder="pswd" value = "<%out.println(pswd);%>" required>
-		<input type="submit" value="Update" class="btn btn-lg btn-primary btn-block">
+		<input type="text" name="userId" placeholder="userId" value = "<%out.println(userId);%>" required>
+		<input type="text" name="NEWPSW1"  placeholder="pswd" value = "<%out.println(pswd);%>" required>
+		<input type="submit" value="Update">
 	</form>
-	<form name="personForm" action="AdminupdatePerson.jsp" method="post" class="form-signin" role="form">
+	<form name="personForm" action="AdminupdatePerson.jsp" method="post"  role="form">
 		<h1 class="form-signin-heading">Person Info</h1>
 		<input type="hidden" name = "personId" value = "<%out.println(personID);%>" required>
-		<input type="text" name="FIRSTNAME" class="form-control" placeholder="First Name" value="<% out.println(firstName); %>" required>
-		<input type="text" name="LASTNAME" class="form-control" placeholder="Last Name" value="<% out.println(lastName); %>" required>
-		<input type="text" name="ADDRESS" class="form-control" placeholder="Address" value="<% out.println(address); %>" required>
-		<input type="text" name="EMAIL" class="form-control" placeholder="Email" value="<% out.println(email); %>" required>
-		<input type="text" name="PHONE" class="form-control" placeholder="Phone (XXX-XXX-XXXX)" value="<% out.println(phone); %>" required>
-		<input type="submit" value="Update" class="btn btn-lg btn-primary btn-block">
+		<input type="text" name="FIRSTNAME" placeholder="First Name" value="<% out.println(firstName); %>" required>
+		<input type="text" name="LASTNAME"  placeholder="Last Name" value="<% out.println(lastName); %>" required>
+		<input type="text" name="ADDRESS"  placeholder="Address" value="<% out.println(address); %>" required>
+		<input type="text" name="EMAIL"  placeholder="Email" value="<% out.println(email); %>" required>
+		<input type="text" name="PHONE"  placeholder="Phone (XXX-XXX-XXXX)" value="<% out.println(phone); %>" required>
+		<input type="submit" value="Update" >
 	</form>
 
 		<h1 class="form-signin-heading">Family Doctor Info</h1>
 		<%
 			for(int i=0;i < doc_id.size();i++){
-				out.println("	<form name=\"FmldocForm\" action=\"AdminupdateDoc.jsp\" method=\"get\" class=\"form-updateuser\" role=\"form\">");
+				
+				out.println("	<form name=\"FmldocForm\" action=\"AdminupdateDoc.jsp\" method=\"get\" role=\"form\">");
+				out.println("<input type=\"hidden\" name=\"olddocId\" value = \""+doc_id.get(i)+"\">"+doc_id.get(i)+"<br/>");
+				out.println("<input type=\"hidden\" name=\"oldpatId\" value = \""+pat_id.get(i)+"\">"+doc_id.get(i)+"<br/>");
 				out.println("<input type=\"text\" name=\"docId\" value = \""+doc_id.get(i)+"\">"+doc_id.get(i)+"<br/>");
-				out.println("<input type=\"submit\" name=\"Update\" class=\"btn btn-lg btn-primary btn-block\">Update</button></form>");
+				out.println("<input type=\"text\" name=\"patId\" value = \""+pat_id.get(i)+"\">"+doc_id.get(i)+"<br/>");
+				out.println("<input type=\"submit\" name=\"Update\">Update</button></form>");
 			}
 		%>
 
