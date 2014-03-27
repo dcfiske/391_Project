@@ -24,7 +24,7 @@
 	ArrayList address = new ArrayList();
 	ArrayList phone = new ArrayList();
 	ArrayList date = new ArrayList();
-	String sql = "SELECT DISTINCT p.FIRST_NAME,p.LAST_NAME,p.ADDRESS,p.PHONE,r.TEST_DATE FROM PERSONS p,RADIOLOGY_RECORD r	WHERE p.PERSON_ID = r.PATIENT_ID  AND r.DIAGNOSIS = '"+Diag+"' AND r.TEST_DATE >= '"+start+"'  AND r.TEST_DATE <='"+end+"'";
+	String sql = "SELECT p.FIRST_NAME,p.LAST_NAME,p.ADDRESS,p.PHONE,MIN(r.TEST_DATE) FROM PERSONS p,RADIOLOGY_RECORD r	WHERE p.PERSON_ID = r.PATIENT_ID  AND r.DIAGNOSIS = '"+Diag+"' AND r.TEST_DATE >= '"+start+"'  AND r.TEST_DATE <='"+end+"' GROUP BY p.FIRST_NAME,p.LAST_NAME,p.ADDRESS,p.PHONE";
 	try
 	{
 	    stmt = conn.createStatement();

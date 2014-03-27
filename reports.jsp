@@ -61,7 +61,7 @@
   <select id="year_start"
          name="year_start" />
   <%String j = "";
-    for(int i=1900;i<2016;i++)
+    for(int i=1900;i<2026;i++)
     {
 	  j = Integer.toString(i).substring(2);
 	  out.println("<option value = \""+j+"\">"+i+"</option>");
@@ -126,7 +126,7 @@
   <select id="year_end"
          name="year_end" />
   <% String k = "";
-  	for(int i=1900;i<2016;i++)
+  	for(int i=1900;i<2026;i++)
   	{
 	   k = Integer.toString(i).substring(2);
 	  out.println("<option value = \""+ j +"\">"+i+"</option>");
