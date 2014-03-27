@@ -22,7 +22,7 @@
 		personId.add((rset.getString(4)).trim());
 	}
 	} catch (Exception ex)
-	{
+	{	
 	    out.println("<hr>" + ex.getMessage() + "<hr>");
 	}
 	try
@@ -34,14 +34,16 @@
 	}
 %>
 <div class="container">
-	<form name="personForm1" action="Adminupdate.jsp" method="get" class="form-updateuser" role="form">
-		<h1 class=\"form-signin-heading\">User List</h1>
+	<form name="personForm1" action="Adminupdate.jsp" method="get"  role="form">
+		<h1>User List</h1>
+		<select  name="personId">
 		<%
 			for(int i=0;i < userId.size();i++){
-				out.println("<input type=\"radio\" name=\"personId\" value = "+personId.get(i)+">"+userId.get(i)+"<br/>");
+				out.println("<option value = "+personId.get(i)+">"+userId.get(i)+"</option>");
 			}
 		%>
 	<input type="submit" value="Enter"/>
+		</select>
 	</form>
 </div>
 </body>
