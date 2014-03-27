@@ -88,9 +88,9 @@
 		<br>
 		<input type="text" name="TESTTYPE" size="25" placeholder="Test Type" required>
 		<br>
-		<input type="text" name="PRESCRIBE" size="25" placeholder="Prescribing Date (YY-MMM-DD)" required>
+		<input type="text" name="PRESCRIBE" size="25" placeholder="Prescribing Date (DD-MMM-YY)" required>
 		<br>
-		<input type="text" name="TESTDATE" size="25" placeholder="Test Date (YY-MMM-DD)" required>
+		<input type="text" name="TESTDATE" size="25" placeholder="Test Date (DD-MMM-YY)" required>
 		<br>
 		<input type="text" name="DIAGNOSIS" size="35" placeholder="Diagnosis" required>
 		<br>
