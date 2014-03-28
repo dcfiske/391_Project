@@ -1,3 +1,4 @@
+<% String pageName = "upload"; %>
 <%@ include file="menu.jsp" %>
 <%@ page import="java.sql.*" %>
 <%

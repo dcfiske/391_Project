@@ -1,3 +1,4 @@
+<% String pageName = "myinfo"; %>
 <%@ include file="menu.jsp" %>
 <SCRIPT LANGUAGE="JavaScript">
     function checkPWD()

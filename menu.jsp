@@ -43,23 +43,35 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="home.jsp">Home</a></li>
+            <li<% if (pageName.equals("home")) { out.println(" class=\"active\""); } %>><a href="home.jsp">Home</a></li>
             <%
 				if (userClass.equals("a"))
 				{
-				    out.println("<li><a href=\"userManager.jsp\">User Management</a></li>");
-				    out.println("<li><a href=\"reports.jsp\">Reports</a></li>");
-				    out.println("<li><a href=\"analysis.jsp\">Data Analysis</a></li>");
+				    if (pageName.equals("manager"))
+					    out.println("<li class=\"active\"><a href=\"userManager.jsp\">User Management</a></li>");
+				    else
+					    out.println("<li><a href=\"userManager.jsp\">User Management</a></li>");
+				    if (pageName.equals("reports"))
+					    out.println("<li class=\"active\"><a href=\"reports.jsp\">Reports</a></li>");
+				    else
+					    out.println("<li><a href=\"reports.jsp\">Reports</a></li>");
+				    if (pageName.equals("analysis"))
+					    out.println("<li class=\"active\"><a href=\"analysis.jsp\">Data Analysis</a></li>");
+				    else
+					    out.println("<li><a href=\"analysis.jsp\">Data Analysis</a></li>");
 				}
 				else if (userClass.equals("r"))
 				{
-				    out.println("<li><a href=\"upload.jsp\">Upload</a></li>");
+				    if (pageName.equals("upload"))
+				    	out.println("<li class=\"active\"><a href=\"upload.jsp\">Upload</a></li>");
+				    else
+				        out.println("<li><a href=\"upload.jsp\">Upload</a></li>");
 				}
 	    %>
-            <li><a href="search.jsp">Search</a></li>
+            <li<% if (pageName.equals("search")) { out.println(" class=\"active\""); } %>><a href="search.jsp">Search</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="myinfo.jsp">My Info</a></li>
+            <li<% if (pageName.equals("myinfo")) { out.println(" class=\"active\""); } %>><a href="myinfo.jsp">My Info</a></li>
             <li><a href="logout.jsp">Logout</a></li>
           </ul>
         </div><!--/.nav-collapse -->

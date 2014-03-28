@@ -1,3 +1,4 @@
+<% String pageName = "reports"; %>
 <%@ include file="menu.jsp" %>
 <%@page import = "java.util.*" %>
 <div class="container">

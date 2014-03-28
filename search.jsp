@@ -1,3 +1,4 @@
+<% String pageName = "search"; %>
 <%@ include file="menu.jsp" %>
 <div class="container">
 	<form name="searchForm" method="post" role="form">
@@ -77,17 +78,17 @@
 		sql += " AND (CONTAINS(patient_name, '" + keywords[0];
 		for (int i = 1; i < keywords.length; i++)
 		{
-		    sql += " OR " + keywords[i];
+		    sql += " AND " + keywords[i];
 		}
 		sql += "', 1) > 0 OR CONTAINS(diagnosis, '" + keywords[0];
 		for (int i = 1; i < keywords.length; i++)
 		{
-		    sql += " OR " + keywords[i];
+		    sql += " AND " + keywords[i];
 		}
 		sql += "', 2) > 0 OR CONTAINS(description, '" + keywords[0];
 		for (int i = 1; i < keywords.length; i++)
 		{
-		    sql += " OR " + keywords[i];
+		    sql += " AND " + keywords[i];
 		}
 		sql += "', 3) > 0)";
 		if (!dateFrom.isEmpty())
