@@ -1,7 +1,7 @@
 <%@ include file="menu.jsp" %>
     <div class="container">
-    	<h1>Welcome to the Radiology Information System!</h1>
-    	<hr>
+    <br>
+    <img src="logo.png" style="display:block; margin-left:auto; margin-right:auto; width:650px; height:auto;">
     </div>
 </body>
 </html>
