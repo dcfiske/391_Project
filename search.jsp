@@ -109,11 +109,11 @@
 		}
 		sql += " ORDER BY";
 		if (orderBy.equals("newest"))
-		    sql += " test_date DESC";
+		    sql += " test_date, record_id DESC";
 		else if (orderBy.equals("oldest"))
-		    sql += " test_date ASC";
+		    sql += " test_date, record_id ASC";
 		else
-		    sql += " (6*(SCORE(1)+SCORE(2)) + 3*SCORE(3) + SCORE(4)) DESC";
+		    sql += " (6*(SCORE(1)+SCORE(2)) + 3*SCORE(3) + SCORE(4)), record_id DESC";
 		
 		try
 		{
