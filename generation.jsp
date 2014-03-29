@@ -1,3 +1,4 @@
+<% String pageName = "reports"; %>
 <%@ include file="menu.jsp" %>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.ArrayList" %>

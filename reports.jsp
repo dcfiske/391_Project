@@ -3,7 +3,7 @@
 <%@page import = "java.util.*" %>
 <div class="container">
 	<form name="personForm" action="generation.jsp" method="post"  role="form">
-		<h1 class="form-signin-heading">Report Generation Info</h1>
+		<h1>Report Generation Info</h1>
 		<legend>Diagnosis</legend>
 		<input type="text" name="diagnosis" placeholder="Diagnosis" required>
   <legend>Start Date </legend>

@@ -5,8 +5,8 @@
 		<h1>Search</h1>
 		<input type="text" name="KEYWORDS" size="100" placeholder="Keywords..." required>
 		<BR>
-		FROM: <input type="text" name="FROM" size="10" maxlength="10" placeholder="MM/DD/YYYY">
-		TO: <input type="text" name="TO" size="10" maxlength="10" placeholder="MM/DD/YYYY">
+		FROM: <input type="text" name="FROM" size="10" maxlength="9" placeholder="DD-MMM-YY">
+		TO: <input type="text" name="TO" size="10" maxlength="9" placeholder="DD-MMM-YY">
 		<BR>
 		ORDER BY: <select name="ORDER">
 					<option value="newest">Newest First</option>
@@ -40,86 +40,95 @@
 		String sql = "";
 		if (userClass.equals("a"))
 		{
-		    sql = "SELECT CONCAT(p1.first_name, CONCAT(' ', p1.last_name))," +
+		    sql = "SELECT r.record_id, image_id, CONCAT(p1.first_name, CONCAT(' ', p1.last_name))," +
 				  " CONCAT(p2.first_name, CONCAT(' ', p2.last_name))," +
-		    	  " CONCAT(p3.first_name, CONCAT(' ', p3.last_name))" +
+		    	  " CONCAT(p3.first_name, CONCAT(' ', p3.last_name))," +
+				  " test_type, prescribing_date, test_date, diagnosis, description" +
 				  " FROM radiology_record r, persons p1, persons p2, persons p3, pacs_images i" +
 				  " WHERE p1.person_id = r.patient_id AND p2.person_id = r.doctor_id AND p3.person_id = r.radiologist_id" +
 				  " AND i.record_id = r.record_id";
 		}
 		else if (userClass.equals("r"))
 		{
-		    sql = "SELECT CONCAT(p1.first_name, CONCAT(' ', p1.last_name))," +
+		    sql = "SELECT r.record_id, image_id, CONCAT(p1.first_name, CONCAT(' ', p1.last_name))," +
 				  " CONCAT(p2.first_name, CONCAT(' ', p2.last_name))," +
-		    	  " CONCAT(p3.first_name, CONCAT(' ', p3.last_name))" +
-				  " test_type, prescribing_date, test_date, diagnosis, description, full_size" +
+		    	  " CONCAT(p3.first_name, CONCAT(' ', p3.last_name))," +
+			 	  " test_type, prescribing_date, test_date, diagnosis, description" +
 				  " FROM radiology_record r, persons p1, persons p2, persons p3, pacs_images i" +
 				  " WHERE p1.person_id = r.patient_id AND p2.person_id = r.doctor_id AND p3.person_id = r.radiologist_id" +
 				  " AND i.record_id = r.record_id AND r.radiologist_id = '" + personID + "'";
 		}
 		else if (userClass.equals("d"))
 		{
-		    sql = "SELECT CONCAT(p1.first_name, CONCAT(' ', p1.last_name))," +
+		    sql = "SELECT r.record_id, image_id, CONCAT(p1.first_name, CONCAT(' ', p1.last_name))," +
 				  " CONCAT(p2.first_name, CONCAT(' ', p2.last_name))," +
-		    	  " CONCAT(p3.first_name, CONCAT(' ', p3.last_name))" +
+		    	  " CONCAT(p3.first_name, CONCAT(' ', p3.last_name))," +
+			 	  " test_type, prescribing_date, test_date, diagnosis, description" +
 				  " FROM radiology_record r, persons p1, persons p2, persons p3, pacs_images i" +
 				  " WHERE p1.person_id = r.patient_id AND p2.person_id = r.doctor_id AND p3.person_id = r.radiologist_id" +
 				  " AND i.record_id = r.record_id AND r.doctor_id = '" + personID + "'";
 		}
 		else if (userClass.equals("p"))
 		{
-		    sql = "SELECT CONCAT(p1.first_name, CONCAT(' ', p1.last_name))," +
+		    sql = "SELECT r.record_id, image_id, CONCAT(p1.first_name, CONCAT(' ', p1.last_name))," +
 				  " CONCAT(p2.first_name, CONCAT(' ', p2.last_name))," +
-		    	  " CONCAT(p3.first_name, CONCAT(' ', p3.last_name))" +
+		    	  " CONCAT(p3.first_name, CONCAT(' ', p3.last_name))," +
+			 	  " test_type, prescribing_date, test_date, diagnosis, description" +
 				  " FROM radiology_record r, persons p1, persons p2, persons p3, pacs_images i" +
 				  " WHERE p1.person_id = r.patient_id AND p2.person_id = r.doctor_id AND p3.person_id = r.radiologist_id" +
 				  " AND i.record_id = r.record_id AND r.patient_id = '" + personID + "'";
 		}
-		sql += " AND (CONTAINS(patient_name, '" + keywords[0];
+		sql += " AND (CONTAINS(p1.first_name, '" + keywords[0];
 		for (int i = 1; i < keywords.length; i++)
 		{
 		    sql += " AND " + keywords[i];
 		}
-		sql += "', 1) > 0 OR CONTAINS(diagnosis, '" + keywords[0];
+		sql += "', 1) > 0 OR CONTAINS(p1.last_name, '" + keywords[0];
 		for (int i = 1; i < keywords.length; i++)
 		{
 		    sql += " AND " + keywords[i];
 		}
-		sql += "', 2) > 0 OR CONTAINS(description, '" + keywords[0];
+		sql += "', 2) > 0 OR CONTAINS(r.diagnosis, '" + keywords[0];
 		for (int i = 1; i < keywords.length; i++)
 		{
 		    sql += " AND " + keywords[i];
 		}
-		sql += "', 3) > 0)";
+		sql += "', 3) > 0 OR CONTAINS(r.description, '" + keywords[0];
+		for (int i = 1; i < keywords.length; i++)
+		{
+		    sql += " AND " + keywords[i];
+		}
+		sql += "', 4) > 0)";
 		if (!dateFrom.isEmpty())
 		{
-		    sql += " AND test_date >= dateFrom";
+		    sql += " AND test_date >= '" + dateFrom + "'";
 		}
 		if (!dateTo.isEmpty())
 		{
-		    sql += " AND test_date <= dateTo";
+		    sql += " AND test_date <= '" + dateTo + "'";
 		}
 		sql += " ORDER BY";
-		if (orderBy == "newest")
+		if (orderBy.equals("newest"))
 		    sql += " test_date DESC";
-		else if (orderBy == "oldest")
+		else if (orderBy.equals("oldest"))
 		    sql += " test_date ASC";
 		else
-		    sql += " (6*SCORE(1) + 3*SCORE(2) + SCORE(3)) DESC";
+		    sql += " (6*(SCORE(1)+SCORE(2)) + 3*SCORE(3) + SCORE(4)) DESC";
 		
-// 		try
-// 		{
-// 		    stmt = conn.createStatement();
-// 		    rset = stmt.executeQuery(sql);
-// 		} catch (Exception ex)
-// 		{
-// 		    out.println("<hr>" + ex.getMessage() + "<hr>");
-// 		}
+		try
+		{
+		    stmt = conn.createStatement();
+		    rset = stmt.executeQuery(sql);
+		} catch (Exception ex)
+		{
+		    out.println("<hr>" + ex.getMessage() + "<hr>");
+		}
 		
 		int recordID = 0;
-		int patientID = 0;
-		int doctorID = 0;
-		int radioID = 0;
+		int imageID = 0;
+		String patientName = "";
+		String doctorName = "";
+		String radiologistName = "";
 		String testType = "";
 		String pDate = "";
 		String tDate = "";
@@ -127,7 +136,7 @@
 		String desc = "";
 		
 		out.println("<div class=\"container\">");
-		out.println(sql);
+		//out.println(sql);
 		out.println("<h1>Results</h1>");
 		out.println("<table class=\"table table-bordered\">");
 		out.println("<tr class=\"active\">");
@@ -141,40 +150,57 @@
 		out.println("<th>Description</th>");
 		out.println("<th>Images</th>");
 		out.println("</tr>");
-		while (rset != null && rset.next())
+		
+		boolean hasNext = false;
+		if (rset != null && rset.next())
+		    hasNext = true;
+		
+		while (hasNext)
 		{
+		    recordID = rset.getInt(1);
+		    imageID = rset.getInt(2);
 		    out.println("<tr>");
 		    out.println("<td>");
-		    patientID = rset.getInt(2);
-		    out.println(patientID);
+		    patientName = rset.getString(3).trim();
+		    out.println(patientName);
 		    out.println("</td>");
 		    out.println("<td>");
-		    doctorID = rset.getInt(3);
-		    out.println(doctorID);
+		    doctorName = rset.getString(4).trim();
+		    out.println(doctorName);
 		    out.println("</td>");
 		    out.println("<td>");
-		    radioID = rset.getInt(4);
-		    out.println(radioID);
+		    radiologistName = rset.getString(5).trim();
+		    out.println(radiologistName);
 		    out.println("</td>");
 		    out.println("<td>");
-		    testType = (rset.getString(5)).trim();
+		    testType = (rset.getString(6)).trim();
 		    out.println(testType);
 		    out.println("</td>");
 		    out.println("<td>");
-		    pDate = rset.getDate(6).toString().trim();
+		    pDate = (rset.getString(7)).trim();
 		    out.println(pDate);
 		    out.println("</td>");
 		    out.println("<td>");
-		    tDate = rset.getDate(7).toString().trim();
+		    tDate = (rset.getString(8)).trim();
 		    out.println(tDate);
 		    out.println("</td>");
 		    out.println("<td>");
-		    diagnosis = (rset.getString(8)).trim();
+		    diagnosis = (rset.getString(9)).trim();
 		    out.println(diagnosis);
 		    out.println("</td>");
 		    out.println("<td>");
-		    desc = (rset.getString(9)).trim();
+		    desc = (rset.getString(10)).trim();
 		    out.println(desc);
+		    out.println("</td>");
+		    out.println("<td>");
+		    out.println("<a href=\"GetOnePic?" + imageID + "\"><img src=\"GetOnePic?" + imageID +"\" style=\"display:block; width:100px; height:auto;\"></a>");
+		    hasNext = rset.next();
+		    while (hasNext && (rset.getInt(1) == recordID))
+		    {
+			    imageID = rset.getInt(2);
+			    out.println("<a href=\"GetOnePic?" + imageID + "\"><img src=\"GetOnePic?" + imageID +"\" style=\"display:block; width:100px; height:auto;\"></a>");
+			    hasNext = rset.next();
+		    }
 		    out.println("</td>");
 		    out.println("</tr>");
 		}

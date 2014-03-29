@@ -60,17 +60,38 @@
 <div class="container">
 	<form name="personForm1" action="updatePersons.jsp" method="post" role="form">
 		<h1>My Info</h1>
-		<input type="text" name="FIRSTNAME" placeholder="First Name" value="<% out.println(firstName); %>" required>
-		<input type="text" name="LASTNAME" placeholder="Last Name" value="<% out.println(lastName); %>" required>
-		<input type="text" name="ADDRESS" placeholder="Address" value="<% out.println(address); %>" required>
-		<input type="text" name="EMAIL" placeholder="Email" value="<% out.println(email); %>" required>
-		<input type="text" name="PHONE" placeholder="Phone (XXX-XXX-XXXX)" value="<% out.println(phone); %>" required>
+		First Name:
+		<br>
+		<input type="text" name="FIRSTNAME" size="25" maxlength="24" value="<% out.println(firstName); %>" required>
+		<br>
+		Last Name:
+		<br>
+		<input type="text" name="LASTNAME" size="25" maxlength="24" value="<% out.println(lastName); %>" required>
+		<br>
+		Street Address:
+		<br>
+		<input type="text" name="ADDRESS" size="100" maxlength="128" value="<% out.println(address); %>" required>
+		<br>
+		Email:
+		<br>
+		<input type="text" name="EMAIL" size="100" maxlength="128" placeholder="email@domain.com" value="<% out.println(email); %>" required>
+		<br>
+		Phone:
+		<br>
+		<input type="text" name="PHONE" size="11" maxlength="10" value="<% out.println(phone); %>" required>
+		<br>
 		<button type="submit" name="Submit">Update</button>
 	</form>
 	<form name="personForm2" onsubmit="return checkPWD()" action="updateUsers.jsp" method="post" role="form">
 		<h1>Change Password</h1>
-		<input type="password" name="NEWPWD1" placeholder="New Password" required>
-		<input type="password" name="NEWPWD2" placeholder="New Password" required>
+		New Password:
+		<br>
+		<input type="password" name="NEWPWD1" size="25" maxlength="24" required>
+		<br>
+		Confirm Password:
+		<br>
+		<input type="password" name="NEWPWD2" size="25" maxlength="24" required>
+		<br>
 		<button type="submit" name="Submit">Update</button>
 	</form>
 </div>

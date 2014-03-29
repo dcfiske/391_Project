@@ -1,3 +1,4 @@
+<% String pageName = "home"; %>
 <%@ include file="menu.jsp" %>
     <div class="container">
     <br>

@@ -67,7 +67,7 @@
 		<h1>Enter Radiology Record</h1>
 		PATIENT:
 		<br>
-		<select name="PATIENTID" style="width:300px">
+		<select name="PATIENTID" style="width:220px">
 			<%
 				for (int i = 0; i < patientIDs.size(); i++)
 				{
@@ -78,7 +78,7 @@
 		<br>
 		DOCTOR:
 		<br>
-		<select name="DOCTORID" style="width:300px">
+		<select name="DOCTORID" style="width:220px">
 			<%
 				for (int i = 0; i < doctorIDs.size(); i++)
 				{
@@ -87,15 +87,25 @@
 			%>
 		</select>
 		<br>
-		<input type="text" name="TESTTYPE" size="25" placeholder="Test Type" required>
+		Test Type:
 		<br>
-		<input type="text" name="PRESCRIBE" size="25" placeholder="Prescribing Date (DD-MMM-YY)" required>
+		<input type="text" name="TESTTYPE" size="25" maxlength="24" required>
 		<br>
-		<input type="text" name="TESTDATE" size="25" placeholder="Test Date (DD-MMM-YY)" required>
+		Prescribing Date:
 		<br>
-		<input type="text" name="DIAGNOSIS" size="35" placeholder="Diagnosis" required>
+		<input type="text" name="PRESCRIBE" size="10" maxlength="9" placeholder="DD-MMM-YY" required>
 		<br>
-		<input type="text" name="DESCRIPTION" size="35" placeholder="Description" required>
+		Test Date:
+		<br>
+		<input type="text" name="TESTDATE" size="10" maxlength="9" placeholder="DD-MMM-YY" required>
+		<br>
+		Diagnosis:
+		<br>
+		<input type="text" name="DIAGNOSIS" size="100" maxlength="128" required>
+		<br>
+		Description:
+		<br>
+		<input type="text" name="DESCRIPTION" size="100" maxlength="1024" required>
 		<br>
 		<button type="submit" name="Submit">Upload</button>
 	</form>
