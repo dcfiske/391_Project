@@ -93,11 +93,11 @@
 		<br>
 		Prescribing Date:
 		<br>
-		<input type="text" name="PRESCRIBE" size="10" maxlength="9" placeholder="DD-MMM-YY" required>
+		<input type="text" name="PRESCRIBE" size="10" maxlength="11" placeholder="DD-MMM-YYYY" required>
 		<br>
 		Test Date:
 		<br>
-		<input type="text" name="TESTDATE" size="10" maxlength="9" placeholder="DD-MMM-YY" required>
+		<input type="text" name="TESTDATE" size="10" maxlength="11" placeholder="DD-MMM-YYYY" required>
 		<br>
 		Diagnosis:
 		<br>
