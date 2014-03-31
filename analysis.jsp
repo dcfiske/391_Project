@@ -40,7 +40,15 @@
 	    rset = stmt.executeQuery(sql2);
 	    rset = stmt.executeQuery(sql3);
 	    rset = stmt.executeQuery(sql4);
-	    rset = stmt.executeQuery(sql5);
+	    rset = stmt.executeQuery(sql5);	    
+	} catch (Exception ex)
+	{
+	    out.println("<hr>" + ex.getMessage() + "<hr>");
+	}
+	
+	try
+	{
+	
 	    rset = stmt.executeQuery(sql6);
 	    rset = stmt.executeQuery(sql7);
 	    rset = stmt.executeQuery(sql8);
