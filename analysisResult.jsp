@@ -103,9 +103,9 @@
 	}
 	sql = sql +  "year ORDER BY ";
 	if(check2 == 1){
-		sql = sql + "week";
+		sql = sql + "year,week ";
 	}else if(check2 == 2){
-		sql = sql + "month";
+		sql = sql + "year,month ";
 	}else{
 		sql = sql + "year ";
 	}
