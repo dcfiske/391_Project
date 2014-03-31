@@ -41,20 +41,19 @@
 				  	 " CONCAT(p2.first_name, CONCAT(' ', p2.last_name))," +
 		    	  	 " CONCAT(p3.first_name, CONCAT(' ', p3.last_name))," +
 				 	 " test_type, TO_CHAR(prescribing_date, 'DD-MON-YYYY'), TO_CHAR(test_date, 'DD-MON-YYYY'), diagnosis, description" +
-				 	 " FROM radiology_record r, persons p1, persons p2, persons p3, pacs_images i" +
-				 	 " WHERE p1.person_id = r.patient_id AND p2.person_id = r.doctor_id AND p3.person_id = r.radiologist_id" +
-				 	 " AND i.record_id = r.record_id";
+				 	 " FROM radiology_record r LEFT OUTER JOIN pacs_images i ON r.record_id = i.record_id, persons p1, persons p2, persons p3" +
+				 	 " WHERE p1.person_id = r.patient_id AND p2.person_id = r.doctor_id AND p3.person_id = r.radiologist_id";
 		if (userClass.equals("r"))
 		{
-		    sql = " AND r.radiologist_id = '" + personID + "'";
+		    sql += " AND r.radiologist_id = '" + personID + "'";
 		}
 		else if (userClass.equals("d"))
 		{
-		    sql = " AND r.doctor_id = '" + personID + "'";
+		    sql += " AND r.doctor_id = '" + personID + "'";
 		}
 		else if (userClass.equals("p"))
 		{
-		    sql = " AND r.patient_id = '" + personID + "'";
+		    sql += " AND r.patient_id = '" + personID + "'";
 		}
 		if (!keywords[0].isEmpty())
 		{
@@ -176,7 +175,8 @@
 		    out.println(desc);
 		    out.println("</td>");
 		    out.println("<td>");
-		    out.println("<a href=\"GetOnePic?" + imageID + "\"><img src=\"GetOnePic?" + imageID +"\" style=\"display:block; width:100px; height:auto;\"></a>");
+		    if (imageID != 0)
+		    	out.println("<a href=\"GetOnePic?" + imageID + "\"><img src=\"GetOnePic?" + imageID +"\" style=\"display:block; width:100px; height:auto;\"></a>");
 		    hasNext = rset.next();
 		    while (hasNext && (rset.getInt(1) == recordID))
 		    {

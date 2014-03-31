@@ -50,10 +50,6 @@
 				{
 				    out.println("Oops! Try again:");
 				}
-				else
-				{
-				    out.println("Sign In:");
-				}
 			%>
 			</h1>
 			<input type="text" name="USERID" class="form-control"
@@ -61,7 +57,7 @@
 				type="password" name="PASSWD" class="form-control"
 				placeholder="Password" required>
 			<button type="submit" name="Submit"
-				class="btn btn-lg btn-primary btn-block">Sign in</button>
+				class="btn btn-lg btn-primary btn-block">Login</button>
 		</form>
 	</div>
 	<!-- /container -->

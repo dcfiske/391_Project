@@ -88,7 +88,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li<% if (pageName.equals("myinfo")) { out.println(" class=\"active\""); } %>><a href="myinfo.jsp">My Info</a></li>
-            <li<% if (pageName.equals("help")) { out.println(" class=\"active\""); } %>><a href="help.html">Help</a></li>
+            <li<% if (pageName.equals("help")) { out.println(" class=\"active\""); } %>><a href="help.html" target="blank">Help</a></li>
             <li><a href="logout.jsp">Logout</a></li>
           </ul>
         </div><!--/.nav-collapse -->
