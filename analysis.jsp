@@ -16,7 +16,7 @@
 	ArrayList testTypes = new ArrayList();
 	String sql = "CREATE OR REPLACE FORCE VIEW PATIENT (PATIENT_ID) AS SELECT distinct patient_id FROM radiology_record";
 	String sql2 = "CREATE OR REPLACE FORCE VIEW TEST_TYPE (TEST_TYPE) AS SELECT distinct  TEST_TYPE FROM radiology_record ";
-	String sql3 = "create or replace VIEW time_id as SELECT  ROW_NUMBER() OVER (ORDER BY year) as time_id,week,month,year as year  FROM (select distinct to_char(TEST_DATE, 'IW') as week,to_char(TEST_DATE, 'MON') as month,to_char(TEST_DATE, 'YY') as year from radiology_record) ";
+	String sql3 = "create or replace VIEW time_id as SELECT  ROW_NUMBER() OVER (ORDER BY year) as time_id,week,month,year as year  FROM (select distinct to_char(TEST_DATE, 'IW') as week,to_char(TEST_DATE, 'MON') as month,to_char(TEST_DATE, 'YYYY') as year from radiology_record) ";
 	String sql4 = "create or replace view patient_number_image as select distinct p.PATIENT_ID,t.TEST_TYPE,COUNT(pi.image_id) as num,ti.time_id "+
 	"from PATIENT p, TEST_TYPE t,RADIOLOGY_RECORD rr, PACS_IMAGES pi,TIME_ID ti " +
 	"where p.PATIENT_ID = rr.PATIENT_ID AND t.TEST_TYPE = rr.TEST_TYPE AND pi.record_id = rr.record_id AND ti.week = to_char(rr.TEST_DATE,'IW') AND ti.year = to_char(rr.TEST_DATE,'YYYY') GROUP BY p.PATIENT_ID,t.TEST_TYPE,ti.time_id ";

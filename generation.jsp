@@ -35,7 +35,7 @@
 	    	Lname.add(rset.getString(2).trim());
 	    	address.add(rset.getString(3).trim());
 	    	phone.add(rset.getString(4).trim());
-	    	date.add(rset.getString(5).trim());
+	    	date.add(rset.getString(5).trim().substring(0,10));
 	    }
 	}
 	catch (Exception ex)
@@ -53,12 +53,20 @@
 <div class="container">
 	<form name="userForm" action="reports.jsp" method="post" role="form">
 		<h1>Generation Info</h1>
+		<table class=table table-bordered>
+		<tr class="active">
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>Address</th>
+		<th>Phone</th>
+		<th>Date</th>
 			<%
 			for(int i = 0; i < Fname.size(); i++){
-				out.println("<li>  "+ Fname.get(i) + " " + Lname.get(i) + ",  " + address.get(i) + " " + phone.get(i) + "    " + date.get(i) + "</li>");
+				out.println("<tr><td>"+ Fname.get(i) + "</td><td>" + Lname.get(i) + "</td><td>" + address.get(i) + "</td><td>" + phone.get(i) + "</td><td>" + date.get(i) + "</tr>");
 				}
 			%>
 			<button> Back </button>
+	</table>
 	</form>
 	</div>
 </body>
