@@ -59,7 +59,7 @@
 	}
 	if(!testType.equals("NONE"))
 	{
-		if(testType.equals("All")){
+		if(testType.equals("ALL")){
 			sql = sql + "," + TES;
 		}
 	}
@@ -73,7 +73,6 @@
 	if(!testType.equals("NONE")){
 		if(testType.equals("ALL")){
 			sql = sql + TES + ".TEST_TYPE = " +NUM + ".TEST_TYPE AND ";
-			sql = sql + TES+".TEST_TYPE = '" + testType + "' AND ";
 		}else{
 			sql = sql + NUM+".TEST_TYPE = '" + testType + "' AND ";
 		}
