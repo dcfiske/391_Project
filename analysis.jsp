@@ -7,7 +7,7 @@
 %>
 <%@ include file="dbConnect.jsp" %>
 <%
-	//This part is to create the datacube by joining the view patient,test and time then collect the infomation. Will be activated when click the data analysis button.
+	//This part is to create the datacube by joining the views patient,test and time then collect the infomation. Will be activated when click the data analysis button.
 	Statement stmt = null;
 	ResultSet rset = null;	
 	ResultSet rset2 = null;

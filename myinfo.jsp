@@ -80,7 +80,7 @@
 		<br>
 		<input type="text" name="PHONE" size="11" maxlength="10" value="<% out.println(phone); %>" required>
 		<br>
-		<button type="submit" name="Submit">Update</button>
+		<button type="submit" name="Submit" value = "myinfo">Update</button>
 	</form>
 	<form name="personForm2" onsubmit="return checkPWD()" action="updateUsers.jsp" method="post" role="form">
 		<h1>Change Password</h1>
@@ -92,7 +92,7 @@
 		<br>
 		<input type="password" name="NEWPWD2" size="25" maxlength="24" required>
 		<br>
-		<button type="submit" name="Submit">Update</button>
+		<button type="submit" name="Submit" value = "myinfo">Update</button>
 	</form>
 </div>
 </body>

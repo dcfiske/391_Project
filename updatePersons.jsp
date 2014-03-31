@@ -2,6 +2,12 @@
 <%
 	if (request.getParameter("Submit") == null)
 	    response.sendRedirect("login.jsp");
+	
+	String redirect = "managePersons.jsp";
+	
+	if (request.getParameter("Submit").trim().equals("myinfo")){
+		redirect = "myinfo.jsp" ;
+	}
     
 	int personID;
 	
@@ -68,5 +74,5 @@
 	    out.println("<hr>" + ex.getMessage() + "<hr>");
 	}
 	
-	response.sendRedirect("managePersons.jsp");
+	response.sendRedirect(redirect);
 %>
