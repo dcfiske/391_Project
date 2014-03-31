@@ -38,7 +38,7 @@
 %>
 <%@ include file="dbConnect.jsp" %>
 <%
-		//select the user table from the underlying db and validate the user name and password
+		//select the person table and get the list of the person's name, both first name and last name
 		Statement stmt = null;
 		ResultSet rset = null;
 		String sql = "SELECT person_id, CONCAT(first_name, CONCAT(' ', last_name)) FROM persons";
@@ -76,6 +76,12 @@
 	{
 		userName = request.getParameter("USERNAME").trim();
 		out.println("<input type=\"hidden\" name=\"USR\" value=" + userName + " required>");
+		while (rset != null && rset.next())
+		{
+		    personID = rset.getInt(1);
+		    personName = rset.getString(2).trim();
+		    out.println("<option value=" + personID + ">" + personName + "</option>");
+		}
 	}
 %>
 		New Password:

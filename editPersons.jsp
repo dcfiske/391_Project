@@ -18,7 +18,7 @@
 %>
 <%@ include file="dbConnect.jsp" %>
 <%
-		//select the user table from the underlying db and validate the user name and password
+		//select the persons table to get the info of the person we pick in the previous page
 		Statement stmt = null;
 		ResultSet rset = null;
 		String sql = "SELECT * FROM persons WHERE person_id = '" + personID + "'";

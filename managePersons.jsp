@@ -8,7 +8,7 @@
 %>
 <%@ include file="dbConnect.jsp" %>
 <%	
-	//select the user table from the underlying db and validate the user name and password
+	//select and collect all the persons names
 	Statement stmt = null;
 	ResultSet rset = null;
 	ArrayList personID = new ArrayList();

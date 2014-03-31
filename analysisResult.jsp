@@ -119,6 +119,7 @@
 	{
 	    stmt = conn.createStatement();
 	    rset = stmt.executeQuery(sql);
+		//due to the dimention's parameter is optionals, we make those conditions to determine the display format
 		if(check1 == 1 && check2 == 1){
 		//
 			out.println("<th>Patient</th>");

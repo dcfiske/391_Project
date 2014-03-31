@@ -33,7 +33,7 @@
 %>
 <%@ include file="dbConnect.jsp" %>
 <%
-	//select the user table from the underlying db and validate the user name and password
+	//Update or add the users info after clicking the Submit button in the usermanager page.
 	Statement stmt = null;
 	ResultSet rset = null;
 	stmt = conn.createStatement();

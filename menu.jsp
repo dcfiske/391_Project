@@ -24,6 +24,7 @@
 </head>
 <body>
 	<%
+		//this is the main page module for all the jsp files to implement.
 		String userClass = "";
 		if (session.getAttribute("id") == null)
 		    response.sendRedirect("login.jsp");

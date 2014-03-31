@@ -14,7 +14,7 @@
 %>
 <%@ include file="dbConnect.jsp" %>
 <%	
-	//select the user table from the underlying db and validate the user name and password
+	//collect and print the list of the doctors names
 	Statement stmt = null;
 	ResultSet rset = null;
 	String doctorID = "";
@@ -57,6 +57,7 @@
 	{   
 		ArrayList docPatientIDs = new ArrayList();
 		ArrayList docPatientNames = new ArrayList();
+		//collect and pritn the list of doctor names for the family_doctor table
 		sql = "SELECT p.person_id, CONCAT(p.first_name, CONCAT(' ', p.last_name))" +
 			 " FROM persons p, family_doctor fd" +
 			 " WHERE fd.patient_id = p.person_id AND fd.doctor_id = '" + doctorID + "'";
@@ -78,6 +79,7 @@
 		
 		ArrayList patientIDs = new ArrayList();
 		ArrayList patientNames = new ArrayList();
+		//collect and print the list of patient names
 		sql = "SELECT p.person_id, CONCAT(p.first_name, CONCAT(' ', p.last_name))" +
 			  " FROM persons p, users u" +
 			  " WHERE p.person_id = u.person_id AND u.class = 'p'";

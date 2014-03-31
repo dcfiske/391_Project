@@ -37,7 +37,7 @@
 		<label for="year_start">Year</label>
 		<select id="year_start" name="year_start"/>
 		<%
-			for (int i = 1900; i < 2026; i++)
+			for (int i = 1900; i < 2016; i++)
 			{
 				out.println("<option value=\"" + i + "\">" + i + "</option>");
 			}
@@ -73,7 +73,7 @@
 		<label for="year_end">Year</label>
 		<select id="year_end" name="year_end"/>
 		<%
-			for (int i = 1900; i < 2026; i++)
+			for (int i = 1900; i < 2016; i++)
 			{
 				out.println("<option value=\"" + i + "\">" + i + "</option>");
 			}

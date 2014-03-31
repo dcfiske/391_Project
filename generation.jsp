@@ -25,6 +25,7 @@
 	ArrayList address = new ArrayList();
 	ArrayList phone = new ArrayList();
 	ArrayList date = new ArrayList();
+	//generate the list of the name,address,phone and the earliest date that they did the test.
 	String sql = "SELECT p.first_name, p.last_name, p.ADDRESS, p.phone, TO_CHAR(MIN(r.test_date), 'DD-MON-YYYY')" +
 				 " FROM persons p, radiology_record r" +
 				 " WHERE p.person_id = r.patient_id AND CONTAINS(r.diagnosis, '" + diag + "', 1) > 0" +

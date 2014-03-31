@@ -33,7 +33,8 @@
 %>
 <%@ include file="dbConnect.jsp" %>
 <%
-		//select the user table from the underlying db and validate the user name and password
+		//select the names of patient,doctor and radiologist, the date and the images with the keywords and date we input.
+		//the user's class will be checked and only the legal result will be displayed
 		Statement stmt = null;
 		ResultSet rset = null;
 
@@ -88,6 +89,7 @@
 		    sql += " AND test_date <= '" + dateTo + "'";
 		}
 		sql += " ORDER BY";
+		//check the way of ordering we pick.
 		if (orderBy.equals("newest"))
 		    sql += " test_date, record_id DESC";
 		else if (orderBy.equals("oldest"))

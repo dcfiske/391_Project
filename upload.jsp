@@ -10,7 +10,7 @@
 %>
 <%@ include file="dbConnect.jsp" %>
 <%
-	//select the user table from the underlying db and validate the user name and password
+	//select and collect the list of patient names
 	Statement stmt = null;
 	ResultSet rset = null;
 	ArrayList patientIDs = new ArrayList();
@@ -35,6 +35,7 @@
 	
 	ArrayList doctorIDs = new ArrayList();
 	ArrayList doctorNames = new ArrayList();
+	//collect the list of doctor names
 	sql = "SELECT p.person_id, CONCAT(p.first_name, CONCAT(' ', p.last_name))" +
 				 " FROM persons p, users u" +
 				 " WHERE p.person_id = u.person_id AND u.class = 'd'";

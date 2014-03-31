@@ -2,6 +2,7 @@
 <%@ include file="menu.jsp" %>
 
 <%
+	//this will update the image after clicking the submit
     int personID = (Integer) session.getAttribute("id");
     int recID = (Integer) session.getAttribute("recordId");
     
