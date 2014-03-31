@@ -1,6 +1,6 @@
 <%
-	String myUSR = "shuxiao";
-	String myPWD = "4A2y3uram";
+	String myUSR = "";
+	String myPWD = "";
 	
 	String driverName = "oracle.jdbc.driver.OracleDriver";
 	String dbstring = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
