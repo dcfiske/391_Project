@@ -109,7 +109,7 @@
 	}else{
 		sql = sql + "year ";
 	}
-	out.println("<hr>"+sql+"<hr>");
+	//out.println("<hr>"+sql+"<hr>");
 	out.println("<div class=\"container\">");
 	out.println("<h1>Results</h1>");
 	out.println("<table class=\"table table-bordered\">");
