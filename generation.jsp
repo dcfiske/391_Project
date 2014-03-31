@@ -18,6 +18,7 @@
 %>
 <%@ include file="dbConnect.jsp" %>
 <%
+	//coeect the name,and infos according to the specific diagnosis and date
 	Statement stmt = null;
 	ResultSet rset = null;
 	ArrayList Fname = new ArrayList();

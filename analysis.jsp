@@ -7,6 +7,7 @@
 %>
 <%@ include file="dbConnect.jsp" %>
 <%
+	//This part is to create the datacube by joining the view patient,test and time then collect the infomation. Will be activated when click the data analysis button.
 	Statement stmt = null;
 	ResultSet rset = null;	
 	ResultSet rset2 = null;
@@ -24,7 +25,8 @@
     String sql6 = "CREATE TABLE PATIENT_NUM_IMAGE2(PATIENT_ID varchar(24),TEST_TYPE varchar(24),TIME_ID int, NUM int default 0) ";
     String sql7 = "INSERT INTO PATIENT_NUM_IMAGE2 (PATIENT_ID,TEST_TYPE,TIME_ID) SELECT p.PATIENT_ID,t.TEST_TYPE,ti.TIME_ID FROM PATIENT p,TEST_TYPE t,TIME_ID ti ";
    	String sql8 = "Merge into PATIENT_NUM_IMAGE2 p2 USING PATIENT_NUMBER_IMAGE p1 ON (p2.TEST_TYPE = p1.TEST_TYPE AND p2.PATIENT_ID = p1.PATIENT_ID AND p2.TIME_ID = p1.TIME_ID) WHEN MATCHED THEN  UPDATE    SET NUM = P1.NUM";
-	String sql9 = "SELECT p.person_id, CONCAT(p.first_name, CONCAT(' ', p.last_name))" +
+	//get the list of patients and testtype
+   	String sql9 = "SELECT p.person_id, CONCAT(p.first_name, CONCAT(' ', p.last_name))" +
 			 " FROM persons p, PATIENT p2" +
 			 " WHERE p.person_id = p2.PATIENT_ID";
 	String sql10 = "SELECT t.TEST_TYPE FROM TEST_TYPE t";

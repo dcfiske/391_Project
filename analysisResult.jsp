@@ -28,6 +28,7 @@
 	String PAT = "PATIENT_ID";
 	String TES = "TEST_TYPE";
 	String sql = "SELECT ";
+	//those codes are for creating the sql query, collecting data from the data cube.
 	if(!patient.equals("NONE"))
 	{	
 		check1 += 1;
