@@ -101,7 +101,14 @@
 	else if(hia.equals("MONTH")){
 		sql = sql  + " month,"; 
 	}
-	sql = sql +  "year";
+	sql = sql +  "year ORDER BY ";
+	if(check2 == 1){
+		sql = sql + "week";
+	}else if(check2 == 2){
+		sql = sql + "month";
+	}else{
+		sql = sql + "year ";
+	}
 	out.println("<hr>"+sql+"<hr>");
 	out.println("<div class=\"container\">");
 	out.println("<h1>Results</h1>");
