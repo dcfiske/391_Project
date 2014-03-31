@@ -11,17 +11,16 @@
 	//select the user table from the underlying db and validate the user name and password
 	Statement stmt = null;
 	ResultSet rset = null;
-	ArrayList userId = new ArrayList();
-	ArrayList personId = new ArrayList();
-	String sql = "SELECT * FROM USERS";
+	ArrayList userName = new ArrayList();
+	String sql = "SELECT user_name FROM users";
 	try
 	{
 	    stmt = conn.createStatement();
 	    rset = stmt.executeQuery(sql);
-	while(rset.next()){
-		userId.add((rset.getString(1)).trim());
-		personId.add((rset.getString(4)).trim());
-	}
+		while(rset.next())
+		{
+		    userName.add(rset.getString(1).trim());
+		}
 	} catch (Exception ex)
 	{	
 	    out.println("<hr>" + ex.getMessage() + "<hr>");
@@ -35,16 +34,25 @@
 	}
 %>
 <div class="container">
-	<form name="personForm1" action="Adminupdate.jsp" method="get"  role="form">
-		<h1>User List</h1>
-		<select  name="personId">
+	<form name="userForm1" action="editUsers.jsp" method="POST" role="form">
+		<h1>Manage Users</h1>
+		Edit User:
+		<br>
+		<select name="USERNAME" style="width:220px">
 		<%
-			for(int i=0;i < userId.size();i++){
-				out.println("<option value = "+personId.get(i)+">"+userId.get(i)+"</option>");
+			for(int i = 0;i < userName.size(); i++)
+			{
+				out.println("<option value=" + userName.get(i) + ">" + userName.get(i) + "</option>");
 			}
 		%>
-				</select>
-	<input type="submit" value="Enter"/>
+		</select>
+		<input type="submit" value="Select User"/>
+	</form>
+		<form name="userForm2" action="editUsers.jsp" method="POST" role="form">
+		<br>
+		Add User:
+		<br>
+		<input type="submit" value="Add New User"/>
 	</form>
 </div>
 </body>

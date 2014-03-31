@@ -1,12 +1,32 @@
 <%@ page import="java.sql.*" %>
 <%
-    if (request.getParameter("Submit") == null)
-        response.sendRedirect("login.jsp");
-
-	int personID = (Integer) session.getAttribute("id");
+	if (request.getParameter("Submit") == null)
+	    response.sendRedirect("login.jsp");
+    
+	String userName = "";
+	String userPwd = request.getParameter("NEWPWD").trim();
+	String userClass = "";
+	int personID = 0;
+	String redirect = "manageUsers.jsp";
 	
-	//get the user input from the info page
-	String newPwd1 = (request.getParameter("NEWPWD1")).trim();
+	if (request.getParameter("CLASS") != null)
+	{
+	    // new user
+	    userName = request.getParameter("USR").trim();
+	    userClass = request.getParameter("CLASS").trim();
+	    personID = Integer.parseInt(request.getParameter("PERSON").trim());
+	}
+	else if (request.getParameter("USR") != null)
+	{
+	    // update user
+	    userName = request.getParameter("USR").trim();
+	}
+	else
+	{
+	    // update my info
+		userName = (String) session.getAttribute("usr");
+	    redirect = "myinfo.jsp";
+	}
 	
 	//establish the connection to the underlying database
 	Connection conn = null;
@@ -16,8 +36,21 @@
 	//select the user table from the underlying db and validate the user name and password
 	Statement stmt = null;
 	ResultSet rset = null;
-	String sql = "UPDATE users SET password = '" + newPwd1 + "' " +
-	        	 "WHERE person_id = '" + personID + "'";
+	stmt = conn.createStatement();
+	String sql = "";
+	
+	if (personID > 0)
+	{   
+		sql = "INSERT INTO users VALUES ('" + userName + "', '" + 
+											    userPwd + "', '" +
+										        userClass + "', '" +
+									            personID + "', SYSDATE)";
+	}
+	else
+	{
+		sql = "UPDATE users SET password = '" + userPwd + "' WHERE user_name = '" + userName + "'";
+	}
+	
 	try
 	{
 	    stmt = conn.createStatement();
@@ -35,5 +68,5 @@
 	    out.println("<hr>" + ex.getMessage() + "<hr>");
 	}
 	
-	response.sendRedirect("myinfo.jsp");
+	response.sendRedirect(redirect);
 %>

@@ -1,11 +1,7 @@
 <%@ page import="java.sql.*" %>
 <%
-
-	String IDforURL = request.getParameter("personId").trim();
-	int personID = Integer.parseInt(IDforURL);
-	
-	//get the user input from the info page
-	String newPwd1 = (request.getParameter("NEWPSW1")).trim();
+	int patientID = Integer.parseInt(request.getParameter("PID").trim());
+	int doctorID = Integer.parseInt(request.getParameter("DID").trim());
 	
 	//establish the connection to the underlying database
 	Connection conn = null;
@@ -15,8 +11,19 @@
 	//select the user table from the underlying db and validate the user name and password
 	Statement stmt = null;
 	ResultSet rset = null;
-	String sql = "UPDATE users SET password = '" + newPwd1 + "' " +
-	        	 "WHERE person_id = '" + personID + "'";
+	stmt = conn.createStatement();
+	String sql = "";
+	
+	if (request.getParameter("Remove") != null)
+	{
+		sql = "DELETE FROM family_doctor WHERE doctor_id = '" + doctorID + "' AND patient_id = '" + patientID + "'";
+	}
+	else
+	{	    
+		sql = "INSERT INTO family_doctor VALUES ('" + doctorID + "', '" + 
+		          									  patientID + "')";
+	}
+	
 	try
 	{
 	    stmt = conn.createStatement();
@@ -33,5 +40,6 @@
 	{
 	    out.println("<hr>" + ex.getMessage() + "<hr>");
 	}
-	response.sendRedirect("Adminupdate.jsp?personId="+IDforURL);
+	
+	response.sendRedirect("managePatients.jsp");
 %>

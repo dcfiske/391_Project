@@ -47,8 +47,9 @@
 	{
 	    session.setAttribute("class", userClass);
 	    session.setAttribute("id", personID);
-	 response.sendRedirect("home.jsp");
+	    session.setAttribute("usr", userName);
+	 	response.sendRedirect("home.jsp");
 	}
 	else
-	 response.sendRedirect("login.jsp?error=InvalidLogin");
+	    response.sendRedirect("login.jsp?error=InvalidLogin");
 %>

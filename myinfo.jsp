@@ -3,7 +3,7 @@
 <SCRIPT LANGUAGE="JavaScript">
     function checkPWD()
     {
-        if (document.personForm2.NEWPWD1.value != document.personForm2.NEWPWD2.value)
+        if (document.personForm2.NEWPWD.value != document.personForm2.NEWPWD2.value)
         {
         	alert("The passwords do not match. Try again.");
             return false;
@@ -86,7 +86,7 @@
 		<h1>Change Password</h1>
 		New Password:
 		<br>
-		<input type="password" name="NEWPWD1" size="25" maxlength="24" required>
+		<input type="password" name="NEWPWD" size="25" maxlength="24" required>
 		<br>
 		Confirm Password:
 		<br>

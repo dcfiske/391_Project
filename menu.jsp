@@ -48,9 +48,25 @@
 				if (userClass.equals("a"))
 				{
 				    if (pageName.equals("manager"))
-					    out.println("<li class=\"active\"><a href=\"userManager.jsp\">User Management</a></li>");
+				    {
+					    out.println("<li class=\"active dropdown\">");
+					    out.println("<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">User Management<b class=\"caret\"></b></a>");
+					    out.println("<ul class=\"dropdown-menu\">");
+					    out.println("<li><a href=\"managePersons.jsp\">Manage People</a></li>");
+					    out.println("<li><a href=\"manageUsers.jsp\">Manage Users</a></li>");
+					    out.println("<li><a href=\"managePatients.jsp\">Manage Patients</a></li>");
+					    out.println("</ul></li>");
+				    }
 				    else
-					    out.println("<li><a href=\"userManager.jsp\">User Management</a></li>");
+				    {
+					    out.println("<li class=\"dropdown\">");
+					    out.println("<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">User Management<b class=\"caret\"></b></a>");
+					    out.println("<ul class=\"dropdown-menu\">");
+					    out.println("<li><a href=\"managePersons.jsp\">Manage People</a></li>");
+					    out.println("<li><a href=\"manageUsers.jsp\">Manage Users</a></li>");
+					    out.println("<li><a href=\"managePatients.jsp\">Manage Patients</a></li>");
+					    out.println("</ul></li>");
+				    }
 				    if (pageName.equals("reports"))
 					    out.println("<li class=\"active\"><a href=\"reports.jsp\">Reports</a></li>");
 				    else
@@ -72,6 +88,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li<% if (pageName.equals("myinfo")) { out.println(" class=\"active\""); } %>><a href="myinfo.jsp">My Info</a></li>
+            <li<% if (pageName.equals("help")) { out.println(" class=\"active\""); } %>><a href="help.html">Help</a></li>
             <li><a href="logout.jsp">Logout</a></li>
           </ul>
         </div><!--/.nav-collapse -->

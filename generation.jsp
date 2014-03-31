@@ -3,40 +3,44 @@
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.ArrayList" %>
 <%
-	String Diag = request.getParameter("diagnosis").trim();
-	String startm = request.getParameter("month_start").trim();
-	String startd = request.getParameter("day_start").trim();
-	String starty = request.getParameter("year_start").trim();
-	String endm = request.getParameter("month_end").trim();
-	String endd = request.getParameter("day_end").trim();
-	String endy = request.getParameter("year_end").trim();
-	String start = startd +"-" + startm + "-" +starty;
-	String end = endd + "-" +endm + "-" + endy;
+	String diag = request.getParameter("diagnosis").trim();
+	String startM = request.getParameter("month_start").trim();
+	String startD = request.getParameter("day_start").trim();
+	String startY = request.getParameter("year_start").trim();
+	String endM = request.getParameter("month_end").trim();
+	String endD = request.getParameter("day_end").trim();
+	String endY = request.getParameter("year_end").trim();
+	String start = startD + "-" + startM + "-" + startY;
+	String end = endD + "-" + endM + "-" + endY;
 
 	//establish the connection to the underlying database
 	Connection conn = null;
 %>
 <%@ include file="dbConnect.jsp" %>
 <%
-	//coeect the name,and infos according to the specific diagnosis and date
 	Statement stmt = null;
 	ResultSet rset = null;
-	ArrayList Fname = new ArrayList();
-	ArrayList Lname = new ArrayList();
+	ArrayList fName = new ArrayList();
+	ArrayList lName = new ArrayList();
 	ArrayList address = new ArrayList();
 	ArrayList phone = new ArrayList();
 	ArrayList date = new ArrayList();
-	String sql = "SELECT p.FIRST_NAME,p.LAST_NAME,p.ADDRESS,p.PHONE,MIN(r.TEST_DATE) FROM PERSONS p,RADIOLOGY_RECORD r	WHERE p.PERSON_ID = r.PATIENT_ID  AND r.DIAGNOSIS = '"+Diag+"' AND r.TEST_DATE >= '"+start+"'  AND r.TEST_DATE <='"+end+"' GROUP BY p.FIRST_NAME,p.LAST_NAME,p.ADDRESS,p.PHONE";
+	String sql = "SELECT p.first_name, p.last_name, p.ADDRESS, p.phone, TO_CHAR(MIN(r.test_date), 'DD-MON-YYYY')" +
+				 " FROM persons p, radiology_record r" +
+				 " WHERE p.person_id = r.patient_id AND CONTAINS(r.diagnosis, '" + diag + "', 1) > 0" +
+				 " AND r.test_date >= '" + start + "' AND r.test_date <='" + end + "'" +
+				 " GROUP BY p.first_name, p.last_name, p.address, p.phone";
 	try
 	{
 	    stmt = conn.createStatement();
 	    rset = stmt.executeQuery(sql);
-	    while(rset!=null&&rset.next()){
-	    	Fname.add(rset.getString(1).trim());
-	    	Lname.add(rset.getString(2).trim());
+	    while(rset!=null&&rset.next())
+	    {
+	    	fName.add(rset.getString(1).trim());
+	    	lName.add(rset.getString(2).trim());
 	    	address.add(rset.getString(3).trim());
 	    	phone.add(rset.getString(4).trim());
-	    	date.add(rset.getString(5).trim().substring(0,10));
+	    	date.add(rset.getString(5).trim());
 	    }
 	}
 	catch (Exception ex)
@@ -52,23 +56,30 @@
 	}
 %>
 <div class="container">
-	<form name="userForm" action="reports.jsp" method="post" role="form">
-		<h1>Generation Info</h1>
-		<table class=table table-bordered>
+	<h1>Patient Info</h1>
+	<table class="table table-bordered">
 		<tr class="active">
-		<th>First Name</th>
-		<th>Last Name</th>
-		<th>Address</th>
-		<th>Phone</th>
-		<th>Date</th>
-			<%
-			for(int i = 0; i < Fname.size(); i++){
-				out.println("<tr><td>"+ Fname.get(i) + "</td><td>" + Lname.get(i) + "</td><td>" + address.get(i) + "</td><td>" + phone.get(i) + "</td><td>" + date.get(i) + "</tr>");
-				}
-			%>
-			<button> Back </button>
+			<th>Name</th>
+			<th>Address</th>
+			<th>Phone</th>
+			<th>Test Date</th>
+		</tr>
+		<%
+			for(int i = 0; i < fName.size(); i++)
+			{
+			    out.println("<tr>");
+			    out.println("<td>" + fName.get(i) + " " + lName.get(i) + "</td>");
+			    out.println("<td>" + address.get(i) + "</td>");
+			    out.println("<td>" + phone.get(i) + "</td>");
+			    out.println("<td>" + date.get(i) + "</td>");
+			    out.println("</tr>");
+				//out.println("<li>  "+ fName.get(i) + " " + lName.get(i) + ",  " + address.get(i) + " " + phone.get(i) + "    " + date.get(i) + "</li>");
+			}
+		%>
 	</table>
+	<form name="backForm" method="post" action="reports.jsp" role="form">
+		<button type="submit">Back</button>
 	</form>
-	</div>
+</div>
 </body>
 </html>		

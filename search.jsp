@@ -3,10 +3,10 @@
 <div class="container">
 	<form name="searchForm" method="post" role="form">
 		<h1>Search</h1>
-		<input type="text" name="KEYWORDS" size="100" placeholder="Keywords..." required>
+		<input type="text" name="KEYWORDS" size="100" placeholder="Keywords...">
 		<BR>
-		FROM: <input type="text" name="FROM" size="10" maxlength="9" placeholder="DD-MMM-YY">
-		TO: <input type="text" name="TO" size="10" maxlength="9" placeholder="DD-MMM-YY">
+		FROM: <input type="text" name="FROM" size="12" maxlength="11" placeholder="DD-MMM-YYYY">
+		TO: <input type="text" name="TO" size="12" maxlength="11" placeholder="DD-MMM-YYYY">
 		<BR>
 		ORDER BY: <select name="ORDER">
 					<option value="newest">Newest First</option>
@@ -37,68 +37,49 @@
 		Statement stmt = null;
 		ResultSet rset = null;
 
-		String sql = "";
-		if (userClass.equals("a"))
+		String sql = "SELECT r.record_id, image_id, CONCAT(p1.first_name, CONCAT(' ', p1.last_name))," +
+				  	 " CONCAT(p2.first_name, CONCAT(' ', p2.last_name))," +
+		    	  	 " CONCAT(p3.first_name, CONCAT(' ', p3.last_name))," +
+				 	 " test_type, TO_CHAR(prescribing_date, 'DD-MON-YYYY'), TO_CHAR(test_date, 'DD-MON-YYYY'), diagnosis, description" +
+				 	 " FROM radiology_record r, persons p1, persons p2, persons p3, pacs_images i" +
+				 	 " WHERE p1.person_id = r.patient_id AND p2.person_id = r.doctor_id AND p3.person_id = r.radiologist_id" +
+				 	 " AND i.record_id = r.record_id";
+		if (userClass.equals("r"))
 		{
-		    sql = "SELECT r.record_id, image_id, CONCAT(p1.first_name, CONCAT(' ', p1.last_name))," +
-				  " CONCAT(p2.first_name, CONCAT(' ', p2.last_name))," +
-		    	  " CONCAT(p3.first_name, CONCAT(' ', p3.last_name))," +
-				  " test_type, prescribing_date, test_date, diagnosis, description" +
-				  " FROM radiology_record r, persons p1, persons p2, persons p3, pacs_images i" +
-				  " WHERE p1.person_id = r.patient_id AND p2.person_id = r.doctor_id AND p3.person_id = r.radiologist_id" +
-				  " AND i.record_id = r.record_id";
-		}
-		else if (userClass.equals("r"))
-		{
-		    sql = "SELECT r.record_id, image_id, CONCAT(p1.first_name, CONCAT(' ', p1.last_name))," +
-				  " CONCAT(p2.first_name, CONCAT(' ', p2.last_name))," +
-		    	  " CONCAT(p3.first_name, CONCAT(' ', p3.last_name))," +
-			 	  " test_type, prescribing_date, test_date, diagnosis, description" +
-				  " FROM radiology_record r, persons p1, persons p2, persons p3, pacs_images i" +
-				  " WHERE p1.person_id = r.patient_id AND p2.person_id = r.doctor_id AND p3.person_id = r.radiologist_id" +
-				  " AND i.record_id = r.record_id AND r.radiologist_id = '" + personID + "'";
+		    sql = " AND r.radiologist_id = '" + personID + "'";
 		}
 		else if (userClass.equals("d"))
 		{
-		    sql = "SELECT r.record_id, image_id, CONCAT(p1.first_name, CONCAT(' ', p1.last_name))," +
-				  " CONCAT(p2.first_name, CONCAT(' ', p2.last_name))," +
-		    	  " CONCAT(p3.first_name, CONCAT(' ', p3.last_name))," +
-			 	  " test_type, prescribing_date, test_date, diagnosis, description" +
-				  " FROM radiology_record r, persons p1, persons p2, persons p3, pacs_images i" +
-				  " WHERE p1.person_id = r.patient_id AND p2.person_id = r.doctor_id AND p3.person_id = r.radiologist_id" +
-				  " AND i.record_id = r.record_id AND r.doctor_id = '" + personID + "'";
+		    sql = " AND r.doctor_id = '" + personID + "'";
 		}
 		else if (userClass.equals("p"))
 		{
-		    sql = "SELECT r.record_id, image_id, CONCAT(p1.first_name, CONCAT(' ', p1.last_name))," +
-				  " CONCAT(p2.first_name, CONCAT(' ', p2.last_name))," +
-		    	  " CONCAT(p3.first_name, CONCAT(' ', p3.last_name))," +
-			 	  " test_type, prescribing_date, test_date, diagnosis, description" +
-				  " FROM radiology_record r, persons p1, persons p2, persons p3, pacs_images i" +
-				  " WHERE p1.person_id = r.patient_id AND p2.person_id = r.doctor_id AND p3.person_id = r.radiologist_id" +
-				  " AND i.record_id = r.record_id AND r.patient_id = '" + personID + "'";
+		    sql = " AND r.patient_id = '" + personID + "'";
 		}
-		sql += " AND (CONTAINS(p1.first_name, '" + keywords[0];
-		for (int i = 1; i < keywords.length; i++)
+		if (!keywords[0].isEmpty())
 		{
-		    sql += " AND " + keywords[i];
+			sql += " AND (CONTAINS(p1.first_name, '" + keywords[0];
+			for (int i = 1; i < keywords.length; i++)
+			{
+			    sql += " AND " + keywords[i];
+			}
+			sql += "', 1) > 0 OR CONTAINS(p1.last_name, '" + keywords[0];
+			for (int i = 1; i < keywords.length; i++)
+			{
+			    sql += " AND " + keywords[i];
+			}
+			sql += "', 2) > 0 OR CONTAINS(r.diagnosis, '" + keywords[0];
+			for (int i = 1; i < keywords.length; i++)
+			{
+			    sql += " AND " + keywords[i];
+			}
+			sql += "', 3) > 0 OR CONTAINS(r.description, '" + keywords[0];
+			for (int i = 1; i < keywords.length; i++)
+			{
+			    sql += " AND " + keywords[i];
+			}
+			sql += "', 4) > 0)";
 		}
-		sql += "', 1) > 0 OR CONTAINS(p1.last_name, '" + keywords[0];
-		for (int i = 1; i < keywords.length; i++)
-		{
-		    sql += " AND " + keywords[i];
-		}
-		sql += "', 2) > 0 OR CONTAINS(r.diagnosis, '" + keywords[0];
-		for (int i = 1; i < keywords.length; i++)
-		{
-		    sql += " AND " + keywords[i];
-		}
-		sql += "', 3) > 0 OR CONTAINS(r.description, '" + keywords[0];
-		for (int i = 1; i < keywords.length; i++)
-		{
-		    sql += " AND " + keywords[i];
-		}
-		sql += "', 4) > 0)";
 		if (!dateFrom.isEmpty())
 		{
 		    sql += " AND test_date >= '" + dateFrom + "'";
@@ -112,8 +93,10 @@
 		    sql += " test_date, record_id DESC";
 		else if (orderBy.equals("oldest"))
 		    sql += " test_date, record_id ASC";
-		else
+		else if (keywords.length > 0)
 		    sql += " (6*(SCORE(1)+SCORE(2)) + 3*SCORE(3) + SCORE(4)), record_id DESC";
+		else
+		    sql += " record_id DESC";
 		
 		try
 		{
