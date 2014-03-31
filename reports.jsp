@@ -64,7 +64,7 @@
   <%String j = "";
     for(int i=1900;i<2026;i++)
     {
-	  j = Integer.toString(i).substring(2);
+	  j = Integer.toString(i);
 	  out.println("<option value = \""+j+"\">"+i+"</option>");
     }
 	  %>      
@@ -129,7 +129,7 @@
   <% String k = "";
   	for(int i=1900;i<2026;i++)
   	{
-	   k = Integer.toString(i).substring(2);
+	   k = Integer.toString(i);
 	  out.println("<option value = \""+ j +"\">"+i+"</option>");
   	}
 	  %>      
